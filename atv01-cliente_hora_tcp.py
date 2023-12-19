@@ -21,7 +21,7 @@ sock.connect(server_address)
 recepcao = threading.Thread(target=receber_mensagens,args=(sock,))
 recepcao.start()
 while (True):    
-    message = input("Digite a mensagem a ser enviada: ")
+    message = input("Digite a mensagem a ser enviada, please: ")
     #Enviando mensagem ao servidor
     sock.sendall(message.encode('utf-8'))
     if message=='0':

@@ -12,9 +12,8 @@ def conexao_cliente(client,address):
         '''
         mensagem = data.decode()
         if (mensagem!='0'):
-            data_atual = datetime.now()
-            hora_atual = str(data_atual)
-            client.sendall(hora_atual.encode())
+            data_atual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            client.sendall(data_atual.encode())
         else:
             client.sendall('0'.encode())
             break
@@ -38,5 +37,3 @@ while True:
     client, address = sock.accept()
     conexao = threading.Thread(target=conexao_cliente,args=(client,address,))
     conexao.start()
-
-    print ("Hora a ser enviada para o cliente")
