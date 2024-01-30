@@ -2,10 +2,9 @@ from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
 from datetime import datetime
 
-# Restrict to a particular path.
 class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
-    
+
 class FunctionRPC:    
     def __init__(self):
         self.call_count = 0
@@ -17,14 +16,13 @@ class FunctionRPC:
         self.call_count += 1
         return self.call_count
     
-# Create server
-with SimpleXMLRPCServer(('localhost', 21213),
+
+with SimpleXMLRPCServer(('localhost', 21213), #Adicona o ip a ser acessado
                         requestHandler=RequestHandler) as server:
+
     server.register_introspection_functions()
 
-    # Register a function
     functions = FunctionRPC()
     server.register_instance(functions)
 
-    # Run the server's main loop
     server.serve_forever()
