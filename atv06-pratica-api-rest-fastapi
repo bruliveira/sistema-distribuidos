@@ -1,0 +1,38 @@
+from typing import Union
+from datetime import date
+from datetime import datetime
+from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"Hello": "Pessoas lindas"}
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Union[str, None] = None):
+    return {"item_id": item_id, "q": q}
+
+@app.get("/data")
+def dataHora():
+    dataAtual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return {"Data e Hora ": dataAtual}
+
+@app.get("/soma")
+def soma(a: Union[str, None] = None, b: Union[str, None] = None):
+    somaValores = int(a) + int(b)
+    return {"Soma: ": somaValores}
+
+@app.get("/sub")
+def sub(a: Union[str, None] = None, b: Union[str, None] = None):
+    subValores = int(a) - int(b)
+    return {"Subtração: ": subValores}
+
+@app.get("/mult")
+def mult(a: Union[str, None] = None, b: Union[str, None] = None):
+    multValores = int(a) * int(b)
+    return {"Multiplicação: ": multValores}
+
+@app.get("/div")
+def div(a: Union[str, None] = None, b: Union[str, None] = None):
+    divValores = int(a) / int(b)
+    return {"Divisão: ": divValores}
